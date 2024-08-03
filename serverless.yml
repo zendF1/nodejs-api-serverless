@@ -1,0 +1,38 @@
+service: nodejs-api-serverless
+useDotenv: true
+
+frameworkVersion: "4"
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'ap-southeast-1'}
+  memorySize: 512
+  timeout: 10
+  # apiGateway:
+  #   minimumCompressionSize: 1024
+  #   shouldStartNameWithService: true
+  environment:
+    NODE_ENV: ${opt:stage, self:provider.stage, 'test'}
+    DB_URI: ${env:DB_URI}
+    DB_PASSWORD: ${env:DB_PASSWORD}
+
+functions:
+  hello:
+    handler: src/handlers/hello.handler
+    events:
+      - http:
+          path: hello
+          method: get
+
+custom:
+  dotenv:
+    path: .env.${self:provider.stage}
+  serverless-offline:
+    httpPort: 3000
+    lambdaPort: 3002
+    noPrependStageInUrl: true
