@@ -28,6 +28,12 @@ functions:
       - http:
           path: hello
           method: get
+  aws:
+    handler: src/handlers/aws.handler
+    events:
+      - http:
+          path: aws
+          method: get
 
 custom:
   dotenv:

@@ -4,5 +4,10 @@
     "install": "^0.13.0",
     "npm": "^10.8.2",
     "serverless-offline": "^14.0.0"
+  },
+  "dependencies": {
+    "@aws-sdk/client-chime-sdk-meetings": "^3.665.0",
+    "@aws-sdk/client-cloudwatch-logs": "^3.665.0",
+    "@aws-sdk/client-dynamodb": "^3.665.0"
   }
 }
